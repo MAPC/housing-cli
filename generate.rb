@@ -3,8 +3,33 @@ require 'pg'
 
 # Housing Charts
 class Munger
-  def initialize(args)
+  # Takes a sheet, a batch, and sql, and lays out data on a grid,
+  # with some options
+  def initialize(sheet, batch, sql, headings)
+    @sheet = sheet
+    @batch = batch
+    @sql = sql
+    @headings = headings
+  end
 
+  def data
+    @batch.connection.exec_params(@sql)
+  end
+
+  def values
+    data.values
+  end
+
+  def fields
+    data.fields
+  end
+
+  def munge
+    yield(data)
+  end
+
+  def generate
+    @sheet.add_row #here we progressively add the rows
   end
 end
 
@@ -27,8 +52,9 @@ end
 class Batch
   attr_reader :workbook
 
-  def initialize(workbook)
+  def initialize(workbook, muni_id)
     @workbook = workbook
+    @muni_id = muni_id
   end
 
   def connection
@@ -39,17 +65,29 @@ end
 class Chart
   attr_reader :batch
 
-  def initialize(batch)
+  def initialize(batch, title)
     @batch = batch
+    @title = title
+  end
+
+  def workbook
+    @batch.workbook.workbook
+  end
+
+  def data
+    "Test"
+  end
+
+  def column
   end
 
   def generate
-    @batch.workbook.workbook.add_worksheet(name: "TestAsdf") do |sheet|
-
+    workbook.add_worksheet(name: @title) do |sheet|
+      yield(sheet, data)
     end
   end
 end
 
 workbook = Workbook.new
 batch = Batch.new(workbook)
-chart = Chart.new(batch)
+# chart = Chart.new(batch, "CostBurdenSubregion")
