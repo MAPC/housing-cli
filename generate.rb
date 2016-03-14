@@ -58,7 +58,7 @@ class Batch
   end
 
   def connection
-    PG::Connection.open(dbname: 'ds', host: '10.10.10.240', user:'dsviewer', password:'dsview933')
+    PG::Connection.open(dbname: 'ds', host: '******', user:'******', password:'******')
   end
 end
 
