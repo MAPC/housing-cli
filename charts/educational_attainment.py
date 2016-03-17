@@ -1,7 +1,13 @@
-
 # Educational Attainment
 sql = "SELECT * FROM tabular.b15002_educational_attainment_acs_m WHERE acs_year = '2010-14'"
 cols = ['municipal', 'lths_p','hs_p','sc_p','assoc_p','bapl_p']
-df = read_sql(sql, conn, coerce_float=True, params=None)
-df = df[(df["muni_id"] == MUNI_ID) | (df["municipal"] == "Massachusetts") | (df["municipal"] == COUNTY)]
-df[cols].to_excel(writer, "EduAttainment", header=["Geography", "% Less than High School", "% High School Diploma", "% Some College", "% Associates Degree", "% Bachelor's or More"])
+dataset = generate.DataGrid(batch, sql, [])
+
+def munging(self):
+  df = self.data()
+  headings = ["Geography", "% Less than High School", "% High School Diploma", "% Some College", "% Associates Degree", "% Bachelor's or More"]
+  self.munged = df[cols][(df["muni_id"] == self.Batch.muni_id) | (df["municipal"] == "Massachusetts") | (df["municipal"] == self.county)]
+  self.munged.columns = headings
+
+dataset.munge(munging)
+dataset.project("educational_attainment")
