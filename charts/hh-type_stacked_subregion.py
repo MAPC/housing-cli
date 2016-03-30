@@ -1,8 +1,8 @@
 
 # Stacked, Percent family, non-family, subregional municipalities
 sql = "SELECT * FROM mapc.hous_hh_fam_00_10m WHERE years = '2010'"
-dataset = generate.DataGrid(batch, sql, [])
-chart = generate.Chart(batch,dataset,"HouseholdsByFamType")
+dataset = DataGrid(batch, sql, [])
+chart = Chart(batch,dataset,"HouseholdsByFamType")
 
 def munging(self):
   df = self.data()

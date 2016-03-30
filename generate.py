@@ -11,6 +11,9 @@ import time
 import os
 import glob 
 import numpy
+import traceback
+from census import Census
+from us import states
 
 class Workbook(object):
   def __init__(self):
@@ -29,18 +32,23 @@ class DataGrid(object):
   """Pulls data from SQL db and projects it onto an Excel worksheet"""
 
   def __init__(self, batch, sql, headings):
-    conn2 = psycopg2.connect("")
+    conn2 = psycopg2.connect("host=db.dev.mapc.org user=editor password=M999PCedit.451 dbname=datasets")
     self.Batch = batch
     self.sql = sql
     self.headings = headings
+    self.full_crosswalk = read_sql("SELECT * FROM public._datakeys_muni351", conn2, coerce_float=True, params=None)
+    self.keys = self.full_crosswalk[self.full_crosswalk["muni_id"] == self.Batch.muni_id]
+    self.cousub_fips = self.keys["COUSUB"].tolist()[0]
+    self.county_fips = self.keys["county_id"].tolist()[0]
     self.munged = self.data() # This stores the final form after a munge occurs
     self.subregions = read_sql("SELECT * FROM public.mapc_subregions", conn2, coerce_float=True, params=None)
     self.subregion = self.subregions[self.subregions['MUNI_ID']==self.Batch.muni_id]["Subregion"].tolist()[0]
     self.subregional_munis = self.subregions[self.subregions["Subregion"].str.contains(self.subregion)]
+    self.census_api = Census("a036e6c9b1f578e84bafe0a0514bb4faf59359dc")
 
     #Cross walk
-    crosswalk_sql = "SELECT * FROM tabular._datakeys_muni351 WHERE muni_id = %s" % self.Batch.muni_id
-    self.crosswalk = read_sql(crosswalk_sql, self.conn(), coerce_float=True, params=None)
+    # crosswalk_sql = "SELECT * FROM tabular._datakeys_muni351 WHERE muni_id = %s" % self.Batch.muni_id
+    self.crosswalk = self.keys
     self.county = self.crosswalk[self.crosswalk['muni_id']==self.Batch.muni_id]["county"].tolist()[0]
     self.muni_name = self.crosswalk[self.crosswalk["muni_id"] == self.Batch.muni_id]["municipal"].tolist()[0]
 
@@ -48,7 +56,7 @@ class DataGrid(object):
     return read_sql(self.sql, self.conn(), coerce_float=True, params=None)
 
   def conn(self):
-    return psycopg2.connect("")
+    return psycopg2.connect("host=10.10.10.240 user=dsviewer password=dsview933 dbname=ds")
 
   def munge(self, fun):
     """ Arrange the dataframe exactly as needed """
@@ -110,7 +118,39 @@ class Chart(object):
 
     self.worksheet.insert_chart("D2", chart)
 
-def main(args):
-  workbook = Workbook()
-  batch = Batch(workbook, 49)
+def camelize(file):
+   first, *rest = file.split('_')
+   return first + ''.join(word.capitalize() for word in rest)
 
+
+def main():
+  print("Running")
+  muni_id = int(sys.argv[1])
+  workbook = Workbook()
+  batch = Batch(workbook, muni_id)
+  charts = glob.glob("./charts/*.py")
+  chart_pairings = dict()
+  for chart in charts: 
+      chart_pairings[camelize(chart.replace("./charts/", "").replace(".py",""))] = open(chart).read()
+
+  failures = []
+  for chart in chart_pairings:
+      log = "Generating " + chart + "... "
+      try: 
+          exec(chart_pairings[chart])
+          log += "Success ✓"
+      except: 
+          failures.append(chart)
+          log += "Failure"
+          traceback.print_exc()
+      print(log)
+
+  if (len(failures) > 0):
+      print("The following charts failed to generate:")
+
+      for failure in failures:
+          print(failure)
+
+  workbook.close()
+
+main()
