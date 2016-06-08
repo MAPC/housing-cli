@@ -72,3 +72,7 @@ def munging(self):
 
 dataset.munge(munging)
 chart.generate(type="column", subtype="percent_stacked")
+
+chart.chart.set_title({
+  'name': 'Average Household Size by Tenure'
+})

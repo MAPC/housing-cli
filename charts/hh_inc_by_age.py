@@ -3,7 +3,7 @@
 # Household Income by Age of Householder
 # sql = "SELECT * FROM tabular.b19037_hh_income_by_age_acs_m WHERE acs_year = '2010-14' AND muni_id = '%s'" % batch.muni_id
 # dataset = generate.DataGrid(batch, sql, [])
-# chart = generate.Chart(batch,dataset,"HouseholdsByFamType")
+# chart = generate.Chart(batch,dataset,"HHByIncome")
 
 # cols = ['iu25u20','iu252039','iu254059','iu256074','iu257599','iu25100o','i25u20','i252039','i254059','i256074','i257599','i25100o','i45u20','i452039','i454059','i456074','i457599','i45100o','i65u20','i652039','i654059','i656074','i657599','i65100o']
 # labels = ['Incomes', 'Under 25', '25-44 years', '45-64 years', '65+ years']
@@ -20,7 +20,7 @@
 # Household Income by Age of Householder
 # sql = "SELECT * FROM tabular.b19037_hh_income_by_age_acs_m WHERE acs_year = '2010-14' AND muni_id = '%s'" % batch.muni_id
 # dataset = DataGrid(batch, sql, [])
-# chart = Chart(batch,dataset,"HouseholdsByFamType")
+# chart = Chart(batch,dataset,"HHByIncome")
 
 # def munging(self):
 #   df = self.data()

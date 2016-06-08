@@ -1,1 +1,2 @@
 git+git://github.com/allthesignals/census.git
+flask

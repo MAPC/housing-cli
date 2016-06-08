@@ -12,3 +12,7 @@ def munging(self):
 
 dataset.munge(munging)
 chart.generate(type="column")
+
+chart.chart.set_title({
+  'name': 'Average Household Size, %s' % dataset.subregion
+})

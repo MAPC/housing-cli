@@ -11,7 +11,9 @@ def munging(self):
   self.munged = df[cols]
   self.munged.columns = headings
   
-
-
 dataset.munge(munging)
 chart.generate(type="column", subtype="percent_stacked")
+
+chart.chart.set_title({
+  'name': 'Housing Units by Type'
+})

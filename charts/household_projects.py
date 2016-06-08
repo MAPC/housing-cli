@@ -36,3 +36,7 @@ def munging(self):
 
 dataset.munge(munging)
 chart.generate(type="line")
+
+chart.chart.set_title({
+  'name': 'Household Projections'
+})

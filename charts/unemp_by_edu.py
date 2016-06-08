@@ -1,4 +1,4 @@
-# Percentage of Families with Incomes below the Poverty Level, Subregion
+# Educational Attainment by Laborf FOrce Status
 sql = "SELECT * FROM tabular.b23006_educational_attainment_by_laborforce_acs_m WHERE acs_year = '2010-14' AND muni_id = %s" % batch.muni_id
 dataset = DataGrid(batch, sql, [])
 chart = Chart(batch,dataset,"EducationAttainByLabor")
@@ -13,3 +13,7 @@ def munging(self):
 
 dataset.munge(munging)
 chart.generate(type="column")
+
+chart.chart.set_title({
+  'name': 'Educational Attainment by Labor Force Status'
+})

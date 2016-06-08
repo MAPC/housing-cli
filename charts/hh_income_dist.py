@@ -14,9 +14,14 @@ def munging(self):
 
   df = self.data()
   cols = ['incu10','inc1015','inc1520','inc2025','inc2530','inc3035','inc3540','inc4045','inc4550','inc5060','inc6075','i7599','i100125','i125150','i150200','in200o']
-  self.munged = df[cols].transpose().sort_values(by=[0])
+  labels = self.metadata[self.metadata["name"].isin(cols)]["alias"].tolist()
+  self.munged = df[cols].transpose()
   self.munged.columns = ["Income Distribution"]
-  self.munged.insert(0, "Income Category", self.munged.index)
+  self.munged.insert(0, "Income Category", labels)
 
 dataset.munge(munging)
 chart.generate(type="column")
+
+chart.chart.set_title({
+  'name': 'Household Income Distribution'
+})

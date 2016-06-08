@@ -9,6 +9,11 @@ def munging(self):
   cols = ['municipal', 'deeds']
   self.munged = df[cols].sort_values(by="deeds", ascending=False)[df['muni_id']\
   .isin(self.subregional_munis["MUNI_ID"])]
+  self.munged.columns = headings
 
 dataset.munge(munging)
 chart.generate(type="column")
+
+chart.chart.set_title({
+  'name': 'Foreclosure Deeds in %s' % dataset.subregion
+})

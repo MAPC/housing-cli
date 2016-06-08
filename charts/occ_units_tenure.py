@@ -9,7 +9,11 @@ def munging(self):
   headings = ['Municipality', 'Ownered-Occupied Housing Units', 'Renter-Occupied Housing Units']
   df = df[df['muni_id'].isin(self.subregional_munis["MUNI_ID"])].sort_values(by="o_hu_p", ascending=False)
   self.munged = df[cols]
-  self.munged.columsn = headings
+  self.munged.columns = headings
 
 dataset.munge(munging)
 chart.generate(type="column", subtype="percent_stacked")
+
+chart.chart.set_title({
+  'name': 'Occupied Units by Tenure, %s' % dataset.subregion
+})

@@ -32,6 +32,21 @@ def munging(self):
   status_quo.insert(1, "Stronger Region", stronger_region["Stronger Region"])
   status_quo.insert(0, "Year", status_quo.index)
   self.munged = status_quo
+  # cols = ['pop_00','pop_10', 'pop_20sq', 'pop_30sq', 'pop_20sr', 'pop_30sr']
+  # df = df[cols]
+  # transposed = df[cols].transpose()
+  
+  # transposed.insert(1,"Year", [2000,2010,2020,2030,2020,2030])
+  # transposed.insert(2, "Type", ["Census", "Census", "Status Quo", "Status Quo", "Stronger Region", "Stronger Region"])
+  # transposed.columns = ["Population", "Year", "Type"]
+  # transposed.append( transposed[transposed["Year"]==2010]["Type"] = "Status Quo", ignore_index=True )
+
+  # self.munged = pd.pivot_table(transposed, values=["Population"], index=["Year"], columns=["Type"])["Population"]
+  # self.munged.insert(0, "Year", self.munged.index)
 
 dataset.munge(munging)
 chart.generate(type="line")
+
+chart.chart.set_title({
+  'name': 'Population Projections'
+})

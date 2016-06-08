@@ -1,0 +1,5 @@
+<!doctype html>
+<title>Hello from Flask</title>
+{% for muni in municipalities %}
+  Generate <a href="municipalities/{{muni["muni_id"]}}">{{ muni["municipal"] }}</a></br>
+{% endfor %} 

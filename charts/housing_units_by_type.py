@@ -4,11 +4,12 @@ dataset = DataGrid(batch, sql, [])
 
 def munging(self):
   cols = ['u1','u2','u3_4','u5_9','u10_19','u20_49','u50ov','u_oth']
+  labels = ["Single-Family","Two-Family","3-4","5-9","10-19","20-49","50+","Other"]
   df = self.data()
   transpose_df = df[cols].transpose()
   transpose_df['pct'] = (transpose_df[0] / df['hu'][0]) * 100
   transpose_df.columns = ["Housing Units", "Percent"]
-  transpose_df.insert(0, "Type", cols)
+  transpose_df.insert(0, "Type", labels)
   self.munged = transpose_df
 
 dataset.munge(munging)

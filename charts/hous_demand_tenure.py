@@ -18,7 +18,6 @@
 #        pivoted['Single Family-Rent'], subtype='stacked', headings=headings, sheetname="HousingDemandStrongeRegion")
 
 
-# Foreclosures
 sql = "SELECT * FROM mapc.hous_projections_hu_demand_by_age_m WHERE muni_id = '%s'" % batch.muni_id
 dataset = DataGrid(batch, sql, [])
 chart = Chart(batch,dataset,"HousingDemandStrongeRegion")
@@ -34,3 +33,7 @@ def munging(self):
 
 dataset.munge(munging)
 chart.generate(type="column", subtype="stacked")
+
+chart.chart.set_title({
+  'name': 'Household Demand by Tenure, Stronger Region'
+})

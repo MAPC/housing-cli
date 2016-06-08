@@ -16,3 +16,7 @@ def munging(self):
 
 dataset.munge(munging)
 chart.generate(type="column", subtype="percent_stacked")
+
+chart.chart.set_title({
+  'name': 'Housing Units by Year Built'
+})

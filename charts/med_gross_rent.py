@@ -22,3 +22,7 @@ def munging(self):
 
 dataset.munge(munging)
 chart.generate(type="column")
+
+chart.chart.set_title({
+  'name': 'Median Gross Rent, %s' % dataset.subregion
+})
