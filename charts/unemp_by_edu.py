@@ -1,5 +1,5 @@
 # Educational Attainment by Laborf FOrce Status
-sql = "SELECT * FROM tabular.b23006_educational_attainment_by_laborforce_acs_m WHERE acs_year = '2010-14' AND muni_id = %s" % batch.muni_id
+sql = "SELECT * FROM tabular.b23006_educational_attainment_by_laborforce_acs_m WHERE acs_year = '2011-15' AND muni_id = %s" % batch.muni_id
 dataset = DataGrid(batch, sql, [])
 chart = Chart(batch,dataset,"EducationAttainByLabor")
 

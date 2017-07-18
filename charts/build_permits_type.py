@@ -1,5 +1,5 @@
 # Building Permits by Type
-sql = "SELECT * FROM tabular.hous_building_permits_m WHERE bp_year = '2014'"
+sql = "SELECT * FROM tabular.hous_building_permits_m WHERE cal_year = '2016'"
 dataset = DataGrid(batch, sql, [])
 chart = Chart(batch,dataset,"building_permits_type")
 

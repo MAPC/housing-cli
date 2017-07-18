@@ -67,7 +67,7 @@ def munging(self):
   renter_table.columns = ["Renter Households"]
   renter_table.index = index_list
 
-  self.munged = owner_table.join(renter_table).convert_objects(convert_numeric=True)
+  self.munged = owner_table.join(renter_table).apply(pd.to_numeric)
   self.munged.insert(0,"Age of Householder", self.munged.index)
 
 dataset.munge(munging)

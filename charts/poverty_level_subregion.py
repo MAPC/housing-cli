@@ -10,7 +10,7 @@
 # column(workbook, subregion_munis["municipal"], subregion_munis["pov_f_p"], headings=["Municipalities","% Families in Poverty"],  sheetname="PovertySubregion")
 
 # Percentage of Families with Incomes below the Poverty Level, Subregion
-sql = "SELECT * FROM tabular.b17017_poverty_by_hh_type_acs_m WHERE acs_year = '2010-14'"
+sql = "SELECT * FROM tabular.b17017_poverty_by_hh_type_acs_m WHERE acs_year = '2011-15'"
 dataset = DataGrid(batch, sql, [])
 chart = Chart(batch,dataset,"PovertySubregion")
 

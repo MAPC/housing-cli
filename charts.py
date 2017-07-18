@@ -47,7 +47,7 @@ class DataGrid(object):
     self.munged = self.data() # This stores the final form after a munge occurs
     self.subregions = read_sql("SELECT * FROM public.mapc_subregions", conn2, coerce_float=True, params=None)
     self.subregion = self.subregions[self.subregions['MUNI_ID']==self.Batch.muni_id]["Subregion"].tolist()[0]
-    self.subregional_munis = self.subregions[self.subregions["Subregion"].isin(["SWAP", "TRIC", "METROWEST"])]
+    self.subregional_munis = self.subregions[self.subregions["Subregion"].isin(["ICC", "NSPC"])]
     self.census_api = Census("a036e6c9b1f578e84bafe0a0514bb4faf59359dc")
 
     #Cross walk

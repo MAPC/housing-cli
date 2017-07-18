@@ -1,5 +1,5 @@
 # Occupied Units by Tenure, Subregion
-sql = "SELECT * FROM tabular.b25032_hu_tenure_by_units_acs_m WHERE acs_year = '2010-14'"
+sql = "SELECT * FROM tabular.b25032_hu_tenure_by_units_acs_m WHERE acs_year = '2011-15'"
 dataset = DataGrid(batch, sql, [])
 chart = Chart(batch,dataset,"TenureSubregion")
 

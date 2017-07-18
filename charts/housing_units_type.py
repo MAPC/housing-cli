@@ -1,5 +1,5 @@
 # Housing Units by Type
-sql = "SELECT * FROM tabular.b25024_hu_units_in_structure_acs_m WHERE acs_year = '2010-14'"
+sql = "SELECT * FROM tabular.b25024_hu_units_in_structure_acs_m WHERE acs_year = '2011-15'"
 dataset = DataGrid(batch, sql, [])
 chart = Chart(batch,dataset,"HousingUnitsByTypeSubregion")
 

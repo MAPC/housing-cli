@@ -8,7 +8,7 @@
 # column(workbook, df['municipal'], df["med_c_r"], headings=headings, sheetname="MedianGrossRent")
 
 # Median Gross Rent
-sql = "SELECT * FROM tabular.b25063_b25064_b25065_rent_acs_m WHERE acs_year = '2010-14'"
+sql = "SELECT * FROM tabular.b25063_b25064_b25065_rent_acs_m WHERE acs_year = '2011-15'"
 dataset = DataGrid(batch, sql, [])
 chart = Chart(batch,dataset,"MedianGrossRent")
 

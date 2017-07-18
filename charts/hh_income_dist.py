@@ -6,7 +6,7 @@
 # column(workbook, cols, incomes, type='bar', headings=["Income Category","Income Distribution"],  sheetname="IncomeDist")
 
 # Household Income Distribution
-sql = "SELECT * FROM tabular.b19001_hh_income_acs_m WHERE acs_year = '2010-14' AND muni_id = '%s'" % batch.muni_id
+sql = "SELECT * FROM tabular.b19001_hh_income_acs_m WHERE acs_year = '2011-15' AND muni_id = '%s'" % batch.muni_id
 dataset = DataGrid(batch, sql, [])
 chart = Chart(batch,dataset,"IncomeDist")
 

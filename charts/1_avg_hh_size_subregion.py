@@ -1,5 +1,5 @@
 # Average Household Size, Subregion
-dataset = DataGrid(batch, "SELECT * FROM tabular.b25010_avg_hhsize_by_tenure_acs_m WHERE acs_year = '2010-14'", [])
+dataset = DataGrid(batch, "SELECT * FROM tabular.b25010_avg_hhsize_by_tenure_acs_m WHERE acs_year = '2011-15'", [])
 chart = Chart(batch,dataset,"avg_hh_size_subregion")
 
 def munging(self):

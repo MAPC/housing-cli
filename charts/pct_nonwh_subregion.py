@@ -10,7 +10,7 @@
 
 
 # Percent Non-White, Subregion
-sql = "SELECT * FROM tabular.b03002_race_ethnicity_acs_m WHERE acs_year = '2005-09'"
+sql = "SELECT * FROM tabular.b03002_race_ethnicity_acs_m WHERE acs_year = '2011-15'"
 dataset = DataGrid(batch, sql, [])
 chart = Chart(batch,dataset,"PercentNonWhiteSubregion")
 

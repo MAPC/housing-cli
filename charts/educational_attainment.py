@@ -1,5 +1,5 @@
 # Educational Attainment
-sql = "SELECT * FROM tabular.b15002_educational_attainment_acs_m WHERE acs_year = '2010-14'"
+sql = "SELECT * FROM tabular.b15002_educational_attainment_acs_m WHERE acs_year = '2011-15'"
 dataset = DataGrid(batch, sql, [])
 
 def munging(self):

@@ -8,7 +8,7 @@
 # column(workbook, mhi["municipal"], mhi["mhi"], headings=["Municipalities", "Median Household Income"],  sheetname="HHIncomeMedian")
 
 # Housing Units by Year Built
-sql = "SELECT * FROM tabular.b25119_mhi_tenure_acs_m WHERE acs_year = '2010-14'"
+sql = "SELECT * FROM tabular.b25119_mhi_tenure_acs_m WHERE acs_year = '2011-15'"
 dataset = DataGrid(batch, sql, [])
 chart = Chart(batch,dataset,"HHIncomeMedian")
 
